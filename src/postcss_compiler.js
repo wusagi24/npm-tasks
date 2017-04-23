@@ -1,6 +1,8 @@
 'use strict';
 
 const fs = require('fs');
+
+// yarn add -D postcss postcss-import postcss-custom-properties postcss-nested postcss-sorting stylefmt autoprefixer csswring
 const postcss = require('postcss');
 const postcssImport = require('postcss-import');
 const postcssCustomProp = require('postcss-custom-properties');

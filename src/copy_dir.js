@@ -1,5 +1,6 @@
 'use strict';
 
+// yarn add -D fs-extra
 const fs = require('fs-extra');
 
 /**

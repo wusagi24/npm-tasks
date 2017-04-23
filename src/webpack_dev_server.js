@@ -1,5 +1,6 @@
 'use strict';
 
+// yarn add -D webpack webpack-dev-server
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
