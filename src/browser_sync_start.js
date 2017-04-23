@@ -22,8 +22,9 @@ function browserSyncStart(serveDir, files, port = null) {
     bs.init(config, err => {
       if (err) {
         reject(err);
+      } else {
+        resolve();
       }
-      resolve();
     });
   });
 }
