@@ -6,7 +6,7 @@ const WebpackDevServer = require('webpack-dev-server');
 
 /**
  * webpack-dev-server を Node.js 経由で実行するタスク
- * @param {Object} webpackConfig - webpack の設定オブジェクト
+ * @param {Object} webpackConfig   - webpack の設定オブジェクト
  * @param {Object} devServerConfig - webpack-dev-server の設定オブジェクト
  * @return {Promise}
  */

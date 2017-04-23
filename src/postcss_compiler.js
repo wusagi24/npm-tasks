@@ -14,10 +14,10 @@ const csswring = require('csswring');
 
 /**
  * PostCSS の変換処理を行うタスク
- * @param {string} src - 変換元ファイルのパス
- * @param {string} dist - 変換後ファイルの出力先パス
- * @param {Object} [prefixOpt=null] - プレフィックスをつける設定 https://github.com/ai/browserslist
- * @param {boolean} [minify=false] - 圧縮をかけるか否か
+ * @param {string}  src              - 変換元ファイルのパス
+ * @param {string}  dist             - 変換後ファイルの出力先パス
+ * @param {Object}  [prefixOpt=null] - プレフィックスをつける設定 https://github.com/ai/browserslist
+ * @param {boolean} [minify=false]   - 圧縮をかけるか否か
  * @return {Promise}
  */
 function postcssCompiler(src, dist, prefixOpt = null, minify = false) {
