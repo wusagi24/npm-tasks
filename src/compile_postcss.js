@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-// yarn add -D postcss postcss-cssnext postcss-sorting stylefmt csswring
+// yarn add -D postcss postcss-cssnext postcss-import postcss-sorting stylefmt csswring
 const postcss = require('postcss');
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
