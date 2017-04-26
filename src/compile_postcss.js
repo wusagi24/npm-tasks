@@ -6,6 +6,7 @@ const fs = require('fs');
 const postcss = require('postcss');
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
+const cssImport = require('postcss-import');
 const postcssSorting = require('postcss-sorting');
 const stylefmt = require('stylefmt');
 const csswring = require('csswring');
@@ -19,6 +20,7 @@ const csswring = require('csswring');
  */
 function compilePpostcss(src, dist, minify = false) {
   const plugins = [
+    cssImport,      // CSS インポート
     postcssSorting, // ソート
     cssnext,        // cssnext
     stylefmt,       // 整形
