@@ -2,18 +2,15 @@
 
 const fs = require('fs');
 
-// yarn add -D postcss precss postcss-sorting stylefmt csswring
+// yarn add -D node-sass postcss autoprefixer postcss-sorting stylefmt csswring
+const sass = require('node-sass');
 const postcss = require('postcss');
 // PostCSS plugins
-const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 const postcssSorting = require('postcss-sorting');
 const stylefmt = require('stylefmt');
 const csswring = require('csswring');
-// PostCSS parser
-const parser = require('postcss-comment'); // コメント解決
 
-
-// TODO: node-sass とその他個別モジュールを使った構成に書き換える（脱 PostCSS）
 /**
  * Sass の変換処理を行うタスク
  * @param {string}  src              - 変換元ファイルのパス
@@ -22,9 +19,27 @@ const parser = require('postcss-comment'); // コメント解決
  * @return {Promise}
  */
 function compileSass(src, dist, minify = false) {
+  return buildSass(src)
+    .then(css => processPostCSS(css, minify))
+    .then(data => outputFile(dist, data));
+}
+
+function buildSass(file) {
+  const opts = {
+    file: file,
+  };
+  return new Promise((resolve, reject) => {
+    sass.render(opts, (err, data) => {
+      if (err) reject(err);
+      else resolve(data.css.toString());
+    });
+  });
+}
+
+function processPostCSS(css, minify) {
   const plugins = [
-    precss,         // sass ライクな記法を処理
     postcssSorting, // ソート
+    autoprefixer,   // プレフィックス付与
     stylefmt,       // 整形
   ];
 
@@ -33,16 +48,21 @@ function compileSass(src, dist, minify = false) {
   }
 
   return new Promise((resolve, reject) => {
-    fs.readFile(src, (err, sass) => {
-      postcss(plugins)
-        .process(sass, { from: src, to: dist, parser })
-        .then(result => {
-          fs.writeFile(dist, result.css, resolve);
-          if (result.map) fs.writeFile(`${dist}.map`, result.map);
-        })
-        .catch(err => {
-          reject(new Error(err));
-        });
+    postcss(plugins).process(css)
+      .then(result => {
+        resolve(result.css);
+      })
+      .catch(err => {
+        reject(new Error(err));
+      });
+  });
+}
+
+function outputFile(path, data) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path, data, err => {
+      if (err) reject(err);
+      else resolve();
     });
   });
 }
