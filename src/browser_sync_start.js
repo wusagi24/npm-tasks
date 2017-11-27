@@ -8,7 +8,7 @@ const bs = require('browser-sync').create();
  * @param {string}          serveDir - ドキュメントルートとするディレクトリ
  * @param {string|string[]} files    - ブラウザリロードの変更監視対象ファイルパス
  * @param {?number}         port     - サーバを立てるポート番号 デフォルトは 3000
- * @return {Promise}
+ * @return {Promise<void, Error>}
  */
 function browserSyncStart(serveDir, files, port = null) {
   return new Promise((resolve, reject) => {

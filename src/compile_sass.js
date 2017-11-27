@@ -16,7 +16,7 @@ const csswring = require('csswring');
  * @param {string}  src              - 変換元ファイルのパス
  * @param {string}  dist             - 変換後ファイルの出力先パス
  * @param {boolean} [minify=false]   - 圧縮をかけるか否か
- * @return {Promise}
+ * @return {Promise<void, Error>}
  */
 function compileSass(src, dist, minify = false) {
   return buildSass(src)
@@ -53,7 +53,7 @@ function processPostCSS(css, minify) {
         resolve(result.css);
       })
       .catch(err => {
-        reject(new Error(err));
+        reject(err);
       });
   });
 }
